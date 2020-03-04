@@ -41,6 +41,9 @@ public class CounterActivity extends AppCompatActivity {
         ticks_increment = bundle.getInt("ticks_increment");
         simpleChronometer = (Chronometer) findViewById(R.id.total_counter); // initiate a chronometer
 
+        if(!hide_ticks)
+            ((TextView) findViewById(R.id.tick_counter)).setText("0");
+
         if(!show_total) {
             ((LinearLayout)findViewById(R.id.stats_layout)).setVisibility(View.GONE);
             ((LinearLayout)findViewById(R.id.message_layout)).setVisibility(View.VISIBLE);

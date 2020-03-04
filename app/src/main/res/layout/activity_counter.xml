@@ -263,12 +263,12 @@
                 android:id="@+id/total_counter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:layout_weight="1"
                 android:text="00:00:00"
                 android:textAlignment="center"
                 android:textColor="@color/accent"
-                android:textSize="18sp" />
+                android:textSize="20sp" />
 
         </LinearLayout>
 
