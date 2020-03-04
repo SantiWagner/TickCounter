@@ -1,0 +1,2 @@
+rootProject.name='TickCounter'
+include ':app'
