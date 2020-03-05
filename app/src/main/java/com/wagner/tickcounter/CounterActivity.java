@@ -2,6 +2,8 @@ package com.wagner.tickcounter;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.media.AudioManager;
+import android.media.ToneGenerator;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.util.Log;
@@ -10,6 +12,8 @@ import android.view.View;
 import android.widget.Chronometer;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import pl.droidsonroids.gif.GifImageView;
 
 public class CounterActivity extends AppCompatActivity {
 
@@ -29,6 +33,8 @@ public class CounterActivity extends AppCompatActivity {
 
     boolean FINISHED = false;
 
+    final ToneGenerator toneGen1 = new ToneGenerator(AudioManager.STREAM_MUSIC, 100);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,14 +51,20 @@ public class CounterActivity extends AppCompatActivity {
             ((TextView) findViewById(R.id.tick_counter)).setText("0");
 
         if(!show_total) {
-            ((LinearLayout)findViewById(R.id.stats_layout)).setVisibility(View.GONE);
-            ((LinearLayout)findViewById(R.id.message_layout)).setVisibility(View.VISIBLE);
+            findViewById(R.id.stats_layout).setVisibility(View.GONE);
+            findViewById(R.id.message_layout).setVisibility(View.VISIBLE);
         }else{
-            ((LinearLayout)findViewById(R.id.message_layout)).setVisibility(View.GONE);
+            findViewById(R.id.message_layout).setVisibility(View.GONE);
         }
+
+        simpleChronometer.setBase(SystemClock.elapsedRealtime());
+        ((TextView)findViewById(R.id.status_tv)).setText("RUNNING");
+
+        simpleChronometer.start(); // start a chronometer
     }
 
     public void goBack(View v){
+        toneGen1.release();
         finish();
     }
 
@@ -62,22 +74,19 @@ public class CounterActivity extends AppCompatActivity {
         if(event.getAction() == MotionEvent.ACTION_DOWN) {
             if(FINISHED)
                 return true;
-            if (ticks == 0) {
-                simpleChronometer.setBase(SystemClock.elapsedRealtime());
-                ((TextView)findViewById(R.id.status_tv)).setText("STARTED");
-                simpleChronometer.start(); // start a chronometer
-            }
 
-
+            toneGen1.startTone(ToneGenerator.TONE_PROP_BEEP2,150);
 
             if (ticks+ticks_increment >= goal_ticks) {
                 ticks+=ticks_increment;
                 ((TextView) findViewById(R.id.tick_counter)).setText("" + ticks);
-                ((LinearLayout)findViewById(R.id.stats_layout)).setVisibility(View.VISIBLE);
-                ((LinearLayout)findViewById(R.id.message_layout)).setVisibility(View.GONE);
+                findViewById(R.id.stats_layout).setVisibility(View.VISIBLE);
+                findViewById(R.id.message_layout).setVisibility(View.GONE);
                 simpleChronometer.stop(); // start a chronometer
                 FINISHED = true;
-                ((TextView)findViewById(R.id.status_tv)).setText("FINISHED");
+                findViewById(R.id.running_gif).setVisibility(View.GONE);
+                ((TextView)findViewById(R.id.status_tv)).setText("GOAL REACHED");
+                findViewById(R.id.completed_image).setVisibility(View.VISIBLE);
                 return true;
             }else{
                 ticks+=ticks_increment;
