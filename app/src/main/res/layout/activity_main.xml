@@ -44,7 +44,7 @@
             android:layout_marginStart="10dp"
             android:layout_weight="1"
             android:text="Initial Setup"
-            android:textColor="@android:color/background_light"
+            android:textColor="@color/titleText"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -81,7 +81,7 @@
             android:id="@+id/tick_value_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:text="1"
             android:textAlignment="center"
             android:textColor="@color/accent"
@@ -129,7 +129,59 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp"
+            android:background="@color/colorAccent" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:tint="@color/accent"
+                app:srcCompat="@drawable/infinity" />
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:text="Infinite mode"
+                android:textColor="@color/main_text"
+                android:textSize="16sp" />
+
+            <CheckBox
+                android:id="@+id/mode_infinity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="30dp"
+                android:buttonTint="@color/accent"
+                android:checked="true"
+                android:textColor="@color/main_text"
+                android:textColorHighlight="@color/accent"
+                android:textColorHint="@color/accent"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/view15"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="15dp"
             android:layout_marginBottom="5dp"
+            android:layout_weight="1"
             android:background="@color/colorAccent" />
 
         <LinearLayout
@@ -138,21 +190,21 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:id="@+id/imageView2"
+                android:id="@+id/goal_imageview"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
                 android:layout_weight="0"
-                android:tint="@color/accent"
                 app:srcCompat="@drawable/nation" />
 
             <TextView
-                android:id="@+id/textView11"
+                android:id="@+id/goal_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:enabled="false"
                 android:text="Goal"
                 android:textColor="@color/main_text"
                 android:textSize="16sp" />
@@ -165,6 +217,7 @@
                 android:layout_marginEnd="20dp"
                 android:backgroundTint="@color/accent"
                 android:ems="10"
+                android:enabled="false"
                 android:inputType="number"
                 android:maxLength="4"
                 android:text="10"
@@ -217,6 +270,7 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="30dp"
                 android:buttonTint="@color/accent"
+                android:checked="true"
                 android:textColor="@color/main_text"
                 android:textColorHighlight="@color/accent"
                 android:textColorHint="@color/accent"
@@ -224,21 +278,12 @@
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/textView14"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="55dp"
-            android:text="Time will stay hidden until the goal is reached"
-            android:textColor="@color/secondaryText"
-            android:textSize="12sp" />
-
         <View
             android:id="@+id/view6"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginStart="15dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="15dp"
             android:layout_marginBottom="5dp"
             android:layout_weight="1"
@@ -247,11 +292,12 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginBottom="15dp"
             android:layout_weight="0"
             android:orientation="horizontal">
 
             <ImageView
-                android:id="@+id/imageView3"
+                android:id="@+id/hide_ticks_imageview"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_marginStart="20dp"
@@ -261,7 +307,7 @@
                 app:srcCompat="@drawable/hide" />
 
             <TextView
-                android:id="@+id/textView9"
+                android:id="@+id/hide_ticks_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -278,20 +324,8 @@
                 android:layout_marginEnd="30dp"
                 android:buttonTint="@color/accent"
                 android:textColor="@color/main_text"
-                android:textColorHighlight="@color/accent"
-                android:textColorHint="@color/accent"
                 android:textSize="16sp" />
         </LinearLayout>
-
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="55dp"
-            android:layout_marginBottom="5dp"
-            android:text="Useful for not speculating with remaining ticks"
-            android:textColor="@color/secondaryText"
-            android:textSize="12sp" />
 
     </LinearLayout>
 

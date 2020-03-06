@@ -43,9 +43,19 @@
             android:layout_marginStart="10dp"
             android:layout_weight="1"
             android:text="Tick Counter"
-            android:textColor="@android:color/background_light"
+            android:textColor="@color/titleText"
             android:textSize="18sp"
             android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="undoLastStep"
+            android:padding="10dp"
+            android:paddingBottom="10dp"
+            android:tint="@color/accent"
+            app:srcCompat="@drawable/ic_undo_black_24dp" />
 
     </LinearLayout>
 
@@ -219,7 +229,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:layout_marginBottom="15dp"
+                    android:layout_marginBottom="10dp"
                     android:layout_weight="1"
                     android:text="Elapsed time stays hidden until goal is reached!"
                     android:textAlignment="center"
@@ -251,7 +261,6 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginTop="5dp"
                 android:background="@color/colorAccent" />
         </LinearLayout>
 

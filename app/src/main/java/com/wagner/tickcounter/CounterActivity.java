@@ -22,6 +22,7 @@ public class CounterActivity extends AppCompatActivity {
     boolean hide_ticks = false;
     boolean show_avg = true;
     boolean show_total = true;
+    boolean infinity_mode = true;
 
     int goal_ticks = 10;
 
@@ -41,16 +42,18 @@ public class CounterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_counter);
 
         Bundle bundle = getIntent().getExtras();
-        hide_ticks = bundle.getBoolean("hide_ticks");
+        infinity_mode = bundle.getBoolean("infinity_mode");
+        hide_ticks = bundle.getBoolean("hide_ticks") && infinity_mode;
         show_total = bundle.getBoolean("show_total");
         goal_ticks = bundle.getInt("goal_ticks");
         ticks_increment = bundle.getInt("ticks_increment");
+
         simpleChronometer = (Chronometer) findViewById(R.id.total_counter); // initiate a chronometer
 
         if(!hide_ticks)
             ((TextView) findViewById(R.id.tick_counter)).setText("0");
 
-        if(!show_total) {
+        if(!show_total && !infinity_mode) {
             findViewById(R.id.stats_layout).setVisibility(View.GONE);
             findViewById(R.id.message_layout).setVisibility(View.VISIBLE);
         }else{
@@ -68,6 +71,22 @@ public class CounterActivity extends AppCompatActivity {
         finish();
     }
 
+    public void undoLastStep(View v){
+        if((ticks-ticks_increment)<0)
+            return;
+
+        if(FINISHED && (ticks-ticks_increment)<goal_ticks)
+        {
+            simpleChronometer.start();
+            ((TextView)findViewById(R.id.status_tv)).setText("RUNNING");
+            FINISHED = false;
+        }
+
+        ticks-=ticks_increment;
+
+        ((TextView) findViewById(R.id.tick_counter)).setText(""+ticks);
+    }
+
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
@@ -77,7 +96,7 @@ public class CounterActivity extends AppCompatActivity {
 
             toneGen1.startTone(ToneGenerator.TONE_PROP_BEEP2,150);
 
-            if (ticks+ticks_increment >= goal_ticks) {
+            if (ticks+ticks_increment >= goal_ticks && !infinity_mode) {
                 ticks+=ticks_increment;
                 ((TextView) findViewById(R.id.tick_counter)).setText("" + ticks);
                 findViewById(R.id.stats_layout).setVisibility(View.VISIBLE);
@@ -92,7 +111,6 @@ public class CounterActivity extends AppCompatActivity {
                 ticks+=ticks_increment;
             }
 
-            Log.e("[SANTI]", (hide_ticks) ? "Hiding ticks..." : "not hiding ticks");
             if (!hide_ticks)
                 ((TextView) findViewById(R.id.tick_counter)).setText("" + ticks);
         }
